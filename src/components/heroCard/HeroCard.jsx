@@ -56,7 +56,7 @@ export function HeroCard({ locationString }) {
                             type="text"
                             value={city}
                             onChange={(e) => setCity(e.target.value)}
-                            placeholder="Enter a City..."
+                            placeholder="Enter a city..."
                             className="w-full py-3 px-5 text-2xl bg-white border-0 rounded-3xl outline-none"
                         />
                         <button type="submit" className="text-white cursor-pointer bg-black/10 p-4 rounded-3xl">
@@ -82,7 +82,7 @@ export function HeroCard({ locationString }) {
                                     <div className="text-center sm:text-left">
                                         <div className="text-sm md:text-base text-gray-700">Today</div>
                                         <div className="text-3xl font-semibold md:text-4xl mb-1">{weatherData?.location?.name}</div>
-                                        <div className="text-sm md:text-base text-gray-700">Temperature: {weatherData?.current?.temp_c}&deg;C</div>
+                                        <div className="text-sm md:text-base text-gray-700">Temperature: {weatherData?.current?.temp_c}°C</div>
                                         <div className="text-sm md:text-base text-gray-700 font-medium">{weatherData?.current?.condition?.text}</div>
                                     </div>
                                 </>
