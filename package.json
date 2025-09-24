@@ -11,6 +11,9 @@
     "test": "jest"
   },
   "dependencies": {
+    "@heroui/button": "^2.2.26",
+    "@heroui/modal": "^2.2.23",
+    "@heroui/react": "^2.8.4",
     "@tailwindcss/vite": "^4.1.13",
     "axios": "^1.12.2",
     "lucide-react": "^0.544.0",

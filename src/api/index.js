@@ -11,3 +11,15 @@ export const getForecastData = async(location) => {
         throw error; 
     }
 };
+
+export const getFutureData = async function ({ location, date }) {
+    try {
+        if(!location || location == '' || location == null || location == undefined || !date) return;
+        const res = await axiosConfig.get(`/future.json?key=befd291c110d4c2caa2102755252209&q=${location}&dt=${date}`);
+        console.log("Response getFutureData: ", res);
+        return res.data;
+    } catch (error) {
+        console.log("Error in getFutureData: ", error?.response?.data); 
+        throw error;
+    }
+}
