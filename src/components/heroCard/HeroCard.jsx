@@ -1,10 +1,11 @@
-import DayCard from "../dayCard/DayCard";
+import {DayCard} from "../dayCard/DayCard";
 import { useEffect, useState } from "react";
 import { getForecastData } from "../../api";
 import getDayName from "../../utils/getDayName";
+import { Search } from 'lucide-react'
 
 
-export default function HeroCard({ locationString }) {
+export function HeroCard({ locationString }) {
 
     const [city, setCity] = useState("");
     const [weatherData, setWeatherData] = useState(null);
@@ -13,16 +14,18 @@ export default function HeroCard({ locationString }) {
     
     const handleSubmit = async(e) => {
         e.preventDefault();
-        setFetching(true)
-        if (!city.trim()) return; 
+        if (!city.trim()) return;
+        if(city.trim().toLowerCase() === weatherData?.location?.name.trim().toLowerCase()) return;
+        setFetching(true); 
         try {
             const res = await getForecastData(city);
             setWeatherData(res);
         } catch (error) {
-            console.log(error);
-            setError(error);
+            console.log(error?.response?.data?.error?.message);
+            setError(error?.response?.data?.error?.message);
         } finally {
             setFetching(false);
+            setError(null)
         }
     };
 
@@ -48,7 +51,7 @@ export default function HeroCard({ locationString }) {
             {/* Search Bar */}
             <div className='w-full flex justify-center'>
                 <div>
-                    <form onSubmit={handleSubmit} className="w-2/">
+                    <form onSubmit={handleSubmit} className="w-2/ flex gap-2 relative">
                         <input
                             type="text"
                             value={city}
@@ -56,18 +59,20 @@ export default function HeroCard({ locationString }) {
                             placeholder="Enter a City..."
                             className="w-full py-3 px-5 text-2xl bg-white border-0 rounded-3xl outline-none"
                         />
+                        <button type="submit" className="text-white cursor-pointer bg-black/10 p-4 rounded-3xl">
+                            <Search className="text-white" />
+                        </button>
                     </form>
                 </div>
             </div>
 
+            { error && (<p className="text-red-500">{error}</p>) }
+            { fetching && <p className="text-black/35 text-xl">Loading...</p> }
+
             {/* Weather card */}
             <div className="relative h-[400px] w-2/">
-            
                 <div className="rounded-3xl h-full shadow-2xl drop-shadow-2xl flex items-center justify-center md:p-8 lg:p-10" style={{boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.25), 0 0 0 1px rgba(255, 255, 255, 0.1)'}}>
-                
                     <div className="flex flex-col sm:flex-row items-center justify-center gap-12 mb-4 px-64">
-                        { error && (<p className="text-red-500">{error}</p>) }
-                        { fetching && <p className="text-black/35">Loading...</p> }
                         { 
                             weatherData && (
                                 <>

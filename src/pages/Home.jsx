@@ -1,8 +1,8 @@
-import HeroCard from '../components/heroCard/HeroCard';
+import {HeroCard} from '../components/heroCard/HeroCard';
 import weatherImage from '/background.jpeg';
 import { useEffect, useState } from 'react';
 
-export default function Home() {
+export function Home() {
     const [location, setLocation] = useState('');
     
     useEffect(() => {

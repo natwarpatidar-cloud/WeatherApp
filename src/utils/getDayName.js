@@ -4,5 +4,5 @@ export default function getDayName(dateStr) {
     ]
     let date = new Date(dateStr);
     const day = date.getDay();
-    return weekdays[day+1];
+    return weekdays[day];
 }
